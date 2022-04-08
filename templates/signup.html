@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+
+    <section class="vh-100 bg-image">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+          <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card">
+                  <div class="card-body p-5">
+                    
+                    <h2 class="text-uppercase text-center mb-5">Đăng kí tài khoản cho web </h2>
+                    <p class="card-subtitle mt-2">
+                      Chào mừng bạn đến với trang web a á 
+                      Tham gia cùng chúng tôi để tìm kiếm thông tin hữu ích cần thiết để cải thiện kỹ năng trồng trọt, giúp bạn phát hiện bệnh của 1 số loại lá cây. Vui lòng điền thông tin của bạn vào biểu mẫu bên dưới để tiếp tục.
+                  </p>
+      
+                    <form method = "post" action ="">
+      
+                      <div class="form-outline mb-4">
+                        <input type="text" id="username" name="username" placeholder="Tên của bạn" class="form-control form-control-lg" />
+                        
+                      </div>
+      
+                      <div class="form-outline mb-4">
+                        <input type="username" id="useraccount" name="useraccount" placeholder="tên tài khoản" class="form-control form-control-lg" />
+                      
+                      </div>
+      
+                      <div class="form-outline mb-4">
+                        <input type="password" id="password"  name="password" placeholder="Mật khẩu" class="form-control form-control-lg" />
+                        
+                      </div>
+      
+                      <div class="form-outline mb-4">
+                        <input type="password" id="repassword" name="repassword" placeholder="xác nhận mât khẩu" class="form-control form-control-lg" />
+                        
+                      </div>
+      
+                      <div class="d-flex justify-content-center">
+                        <button type="submit" value = "signup" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                      </div>
+                      {% if error %}
+                        <p>{{error}}</p>
+                      {% endif %}
+      
+                      <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login" class="fw-bold text-body"><u>Login here</u></a></p>
+      
+                    </form>
+      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

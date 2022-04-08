@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrangTraiBacSiKhoa</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<body>
+    <section class="navigation">
+        <div class="navbar navbar-expand-md bg-light navbar-light">
+            <nav class="container" >
+              <a class="navbar-brand" href="#"><img src="{{url_for('static',filename = 'image/logo.png')}}" class="logo" alt=""></a>
+              <div class="navbar-brand">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="./homepage">Trang Chủ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./topic">Group</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./dinhduong">Dinh Dưỡng Khoa Học</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./detect">Phát Hiện Bệnh</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./login">Sign in</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./signup">Sign up</a>
+                  </li> 
+                </ul>
+                  
+            </nav>
+        </div>
+    </section>
+
+    <section class="wrap-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="title-heading">
+                        <h1> <br>DETECT LEAF DISEASES </br></h1>
+                        <span></span>
+                    </div>
+                    <div class="title-content">
+                        <span>Giới thiệu về trang web, về sản phẩm , về chức năng phát hiện bệnh</span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="avatar">
+                        <img src="{{url_for('static',filename = 'image/che-pham.jpg')}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="introduce">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"><img src="{{url_for('static',filename = 'image/images.jpg')}}" alt=""></div>
+                <div class="col-lg-8">
+                    <div class="introduce-heading">
+                        <p>Giới thiệu</p>
+                        <h2>Về Trang Trại</h2>
+                    </div>
+                    <div class="introduce-content">
+                        <span>Tầm quan trọng của trang web <br>
+                            <br>
+                            Trồng trọt không phải là chuyên môn của một số gia đình nhưng nhu cầu về thực phẩm là rất quan trọng, dẫn đến việc tự trồng rau trong nhà để đáp ứng nhu cầu thực phẩm là bình thường đối với cuộc sống hiện tại của con người. Nhưng chỉ trồng và ăn, nó không đảm bảo chất lượng. Ăn rau có thể ảnh hưởng đến sức khỏe của mọi người <br>
+                            
+                           <strong> <br>
+                             <br>
+                            </strong> 
+                            Nhận thức được những khó khăn đó, chúng tôi đã xây dựng một trang web giúp người dùng nhận biết mầm bệnh thực vật và cung cấp các phương pháp xử lý kịp thời. <br>
+                             <br>
+                            
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section class="slide">
+        <div class="container">
+            <div class="w3-content w3-section">
+                <img class="mySlides" src="{{url_for('static',filename = 'image/slide1.jpg')}}" >
+                <img class="mySlides" src="{{url_for('static',filename = 'image/slide2.jpg')}}" >
+                <img class="mySlides" src="{{url_for('static',filename = 'image/slide3.jpg')}}" >
+                <img class="mySlides" src="{{url_for('static',filename = 'image/slide4.jpg')}}" >
+                <img class="mySlides" src="{{url_for('static',filename = 'image/slide6.jpg')}}" >
+                <button class=" w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class=" w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="news">
+       <div class="container">
+        
+       </div>
+    </section>
+
+    <div class="location">
+      <div class="container">
+        
+            <div class="footer__contact">
+              <div class="body_footter">
+              <div class="left">
+              <p class="footer__contact-title">LIÊN HỆ VỚI CHÚNG TÔI</p>
+              <ul class="footer__contact-list">
+                <li >
+                  <a class="footer__contact-address"> Tầng 6, toà nhà 254 Nguyễn Văn Linh, P.Thạch Gián, Q. Thanh
+                    Khê, Đà Nẵng</a>
+                </li>
+                <li >
+                    <a class="footer__contact-phone">(07) 6672 3591 </a>
+                  </li>
+                  <li >
+                    <a class="footer__contact-mail">
+                      lekhoa657@gmail.com
+                    </a>
+                  </li>
+                </div>
+              
+               <div class="right">
+              <p class="footer__contact-title">THÔNG TIN</p>
+                <ul class="footer__shipping">
+                  <li>
+                    <a>Về chúng tôi</a>
+                  </li>
+                  <li>
+                    <a>Điều khoản &amp; Điều kiện</a>
+                  </li>
+                  <li>
+                    <a>Chính sách riêng tư</a>
+                  </li>
+                  
+                </ul>
+                 </div>
+                 <div class="center">
+                  <p class="footer__contact-title">CHUYÊN MUC</p>
+                  <ul class="footer__center">
+                    <li>
+                      <a>Hỏi đáp</a>
+                    </li>
+                    <li>
+                      <a class="bth-social" href="https://www.facebook.com/">
+                        <i class="fab fa-facebook"></i>
+                      </a>
+                      <a class="bth-social" href="https://www.instagram.com/">
+                        <i class="fab fa-instagram"></i>
+                      </a>
+                    </li>
+                    
+                    
+                    
+                  </ul>
+                
+                 </div>
+            </div>
+                <div class="col-sm-12 col-md-8">
+                  <p class="footer__extend-text">
+                    Copyright © Your Website 2022
+                  </p>
+                </div>
+                <div className="col-sm-12 col-md-4">
+                  <div className="footer__extend-img d-flex justify-content-end">
+                    <img src={footer_extend} alt="" />
+                  </div>
+            </div>
+            
+                
+              </div>
+            </div>  
+            
+           
+        </div> 
+      
+        <script type="text/script" src="js/bootstrap.min.js"></script>
+        <script>
+            var slideIndex = 1;
+            showDivs(slideIndex);
+    
+            function plusDivs(n) {
+            showDivs(slideIndex += n);
+            }
+    
+            function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = x.length}
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            x[slideIndex-1].style.display = "block";  
+            }
+        </script>
+    
+</body>
+</html>
