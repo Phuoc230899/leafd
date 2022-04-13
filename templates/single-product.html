@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrangTraiBacSiKhoa</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename = 'assets/images/favicon.ico')}}" />
+
+    <!-- CSS
+    ============================================ -->
+
+    <!-- Vendor CSS (Contain Bootstrap, Icon Fonts) -->
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/vendor/font-awesome.min.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/vendor/Pe-icon-7-stroke.css')}}" />
+
+    <!-- Plugin CSS (Global Plugins Files) -->
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/animate.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/nice-select.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/magnific-popup.min.css')}}" />
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/style.css')}}">
+</head>
+
+<body>
+    <section class="navigation">
+        <div class="navbar navbar-expand-md bg-light navbar-light">
+            <nav class="container" >
+              <a class="navbar-brand" href="#"><img src="{{url_for('static',filename = 'image/logo.png')}}" class="logo" alt=""></a>
+              <div class="navbar-brand">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="./homepage">Trang Chủ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./topic">Group</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./dinhduong">Dinh Dưỡng Khoa Học</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./detect">Phát Hiện Bệnh</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./login">Sign in</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./signup">Sign up</a>
+                  </li> 
+                </ul>
+                  
+            </nav>
+        </div>
+    </section>
+
+    <main class="main-content">
+        {% if product %}
+            <form method = "post">
+                <div class="single-product-area section-space-top-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="single-product-img h-100">
+                                    <div class="swiper-container single-product-slider">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <a href="{{product.Link_Image}}" class="single-img gallery-popup">
+                                                    <img class="img-full" src="{{product.Link_Image}}" alt="Product Image">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- Add Pagination -->
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="product-thumb-with-content row">
+                                    <div class="col-12 order-lg-1 order-2 pt-10 pt-lg-0">
+                                        <div class="single-product-content">
+                                            <h2 class="title" id="product_name" name="product_name">{{product.Product_Name}}</h2>
+                                            <div class="price-box pb-1">
+                                                <span class="new-price text-danger">${{product.Price}}</span>
+                                                <span class="old-price text-primary">$90.00</span>
+                                            </div>
+                                            <div class="rating-box-wrap pb-7">
+                                                <div class="rating-box">
+                                                    <ul>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="review-status ps-4">
+                                                    <a href="javascript:void(0)">( 1 Customer Review )</a>
+                                                </div>
+                                            </div>
+                                            <p class="short-desc mb-6">Lorem ipsum dolor sit amet, consecte adipisicin elit, sed do
+                                                eiusmod tempor incidi ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercita ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                                irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+                                            <ul class="quantity-with-btn pb-7">
+                                                <li class="quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box"  name = "quantity" value = "{{request.form['quantity']}}" placeholder = "1" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="add-to-cart">
+                                                    <button type = "submit" onclick="alert('{{message}}')" class="btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0">Add to cart</button>
+                                                </li>
+                                                <li class="wishlist-btn-wrap">
+                                                    <a class="btn rounded-0" href="../cart">
+                                                        <i class="pe-7s-cart"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="product-category text-matterhorn pb-2">
+                                                <span class="title">Categories :</span>
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:void(0)">Natural,</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">Organic,</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">Beautiful,</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">Organic Food</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="product-category product-tags text-matterhorn pb-4">
+                                                <span class="title">Product Tags :</span>
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:void(0)">Organic,</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">Vegetable,</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">Fruits</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="social-link align-items-center pb-lg-8">
+                                                <span class="title pe-3">Share:</span>
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:void(0)">
+                                                            <i class="fa fa-pinterest-p"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">
+                                                            <i class="fa fa-twitter"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">
+                                                            <i class="fa fa-tumblr"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)">
+                                                            <i class="fa fa-dribbble"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        {%endif%}
+        <div class="product-tab-area section-space-top-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="nav product-tab-nav product-tab-style-2" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="active btn btn-custom-size" id="description-tab" data-bs-toggle="tab" href="#description" role="tab">
+                                    Description
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="btn btn-custom-size" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">
+                                    Reviews
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="btn btn-custom-size" id="shipping-tab" data-bs-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">
+                                    Shipping
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content product-tab-content">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                <div class="product-description-body">
+                                    <p class="short-desc mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod tempor incidi ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercit ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                                        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                        nulla pariatur. Excepteurdf sint occaecat cupidatat non proident, sunt in culpa qui
+                                        officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste
+                                        natus error sit voluptatem accusl doloremque laudantium, totam rem aperiam, eaque
+                                        ipsa quae ab illo inventore v et quasi architecto beatae vitae dicta sunt explicabo.
+                                        Nemo enim ipsam voluptadtem quia voluptas sit aspernatur aut odit aut fugit, sed
+                                        quia consequuntur magni dolores eos qui ratione</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                                <div class="product-review-body">
+                                    <h4 class="heading mb-5">3 Review Items</h4>
+                                    <ul class="user-info-wrap">
+                                        <li>
+                                            <ul class="user-info">
+                                                <li class="user-avatar">
+                                                    <img src="{{url_for('static',filename = 'assets/images/testimonial/user/1.png')}}" alt="User Image">
+                                                </li>
+                                                <li class="user-comment">
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <span><strong>Oscar -</strong> March 15, 2021</span>
+                                                    </div>
+                                                    <p class="short-desc mb-0">“Sed ligula sapien, fermentum id est eget,
+                                                        viverra auctor sem. Vivamus maximus enim vitae urna porta, ut
+                                                        euismod nibh lacinia ellentesque at diam voluptas quas nisi, culpa
+                                                        in accusantium“</p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul class="user-info">
+                                                <li class="user-avatar">
+                                                    <img src="{{url_for('static',filename = 'assets/images/testimonial/user/1.png')}}" alt="User Image">
+                                                </li>
+                                                <li class="user-comment">
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <span><strong>Oscar -</strong> March 15, 2021</span>
+                                                    </div>
+                                                    <p class="short-desc mb-0">“Sed ligula sapien, fermentum id est eget,
+                                                        viverra auctor sem. Vivamus maximus enim vitae urna porta, ut
+                                                        euismod nibh lacinia ellentesque at diam voluptas quas nisi, culpa
+                                                        in accusantium“</p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul class="user-info">
+                                                <li class="user-avatar">
+                                                    <img src="{{url_for('static',filename = 'assets/images/testimonial/user/1.png')}}" alt="User Image">
+                                                </li>
+                                                <li class="user-comment">
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <span><strong>Oscar -</strong> March 15, 2021</span>
+                                                    </div>
+                                                    <p class="short-desc mb-0">“Sed ligula sapien, fermentum id est eget,
+                                                        viverra auctor sem. Vivamus maximus enim vitae urna porta, ut
+                                                        euismod nibh lacinia ellentesque at diam voluptas quas nisi, culpa
+                                                        in accusantium“</p>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <div class="feedback-area pt-5">
+                                        <h2 class="heading mb-1">Add a review</h2>
+                                        <p class="short-desc mb-3">Your email address will not be published.</p>
+                                        <div class="rating-box">
+                                            <span>Your rating</span>
+                                            <ul class="ps-4">
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                            </ul>
+                                        </div>
+                                        <form class="feedback-form pt-8" action="#">
+                                            <div class="group-input">
+                                                <div class="form-field me-md-6 mb-6 mb-md-0">
+                                                    <input type="text" name="name" placeholder="Your Name*" class="input-field">
+                                                </div>
+                                                <div class="form-field me-md-6 mb-6 mb-md-0">
+                                                    <input type="text" name="email" placeholder="Your Email*" class="input-field">
+                                                </div>
+                                                <div class="form-field">
+                                                    <input type="text" name="number" placeholder="Phone number" class="input-field">
+                                                </div>
+                                            </div>
+                                            <div class="form-field mt-6">
+                                                <textarea name="message" placeholder="Message" class="textarea-field"></textarea>
+                                            </div>
+                                            <div class="button-wrap mt-8">
+                                                <button type="submit" value="submit" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover btn-lg rounded-0" name="submit">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+                                <div class="product-shipping-body">
+                                    <h4 class="title">Shipping</h4>
+                                    <p class="short-desc mb-4">The item will be shipped from China. So it need 15-20 days to
+                                        deliver. Our product is good with reasonable price and we believe you will worth it.
+                                        So please wait for it patiently! Thanks.Any question please kindly to contact us and
+                                        we promise to work hard to help you to solve the problem</p>
+                                    <h4 class="title">About return request</h4>
+                                    <p class="short-desc mb-4">If you don't need the item with worry, you can contact us
+                                        then we will help you to solve the problem, so please close the return request!
+                                        Thanks</p>
+                                    <h4 class="title">Guarantee</h4>
+                                    <p class="short-desc mb-0">If it is the quality question, we will resend or refund to
+                                        you; If you receive damaged or wrong items, please contact us and attach some
+                                        pictures about product, we will exchange a new correct item to you after the
+                                        confirmation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="location">
+            <div class="container">
+              
+                  <div class="footer__contact">
+                    <div class="body_footter">
+                    <div class="left">
+                    <p class="footer__contact-title">LIÊN HỆ VỚI CHÚNG TÔI</p>
+                    <ul class="footer__contact-list">
+                      <li >
+                        <a class="footer__contact-address"> Tầng 6, toà nhà 254 Nguyễn Văn Linh, P.Thạch Gián, Q. Thanh
+                          Khê, Đà Nẵng</a>
+                      </li>
+                      <li >
+                          <a class="footer__contact-phone">(07) 6672 3591 </a>
+                        </li>
+                        <li >
+                          <a class="footer__contact-mail">
+                            lekhoa657@gmail.com
+                          </a>
+                        </li>
+                      </div>
+                    
+                     <div class="right">
+                    <p class="footer__contact-title">THÔNG TIN</p>
+                      <ul class="footer__shipping">
+                        <li>
+                          <a>Về chúng tôi</a>
+                        </li>
+                        <li>
+                          <a>Điều khoản &amp; Điều kiện</a>
+                        </li>
+                        <li>
+                          <a>Chính sách riêng tư</a>
+                        </li>
+                        
+                      </ul>
+                       </div>
+                       <div class="center">
+                        <p class="footer__contact-title">CHUYÊN MUC</p>
+                        <ul class="footer__center">
+                          <li>
+                            <a>Hỏi đáp</a>
+                          </li>
+                          <li>
+                            <a class="bth-social" href="https://www.facebook.com/">
+                              <i class="fab fa-facebook"></i>
+                            </a>
+                            <a class="bth-social" href="https://www.instagram.com/">
+                              <i class="fab fa-instagram"></i>
+                            </a>
+                          </li>
+                          
+                          
+                          
+                        </ul>
+                      
+                       </div>
+                  </div>
+                      <div class="col-sm-12 col-md-8">
+                        <p class="footer__extend-text">
+                          Copyright © Your Website 2022
+                        </p>
+                      </div>
+                      <div className="col-sm-12 col-md-4">
+                        <div className="footer__extend-img d-flex justify-content-end">
+                          <img src={footer_extend} alt="" />
+                        </div>
+                  </div>
+                  
+                      
+                    </div>
+                  </div>  
+                  
+                 
+    </div> 
+</body>
+
+</html>

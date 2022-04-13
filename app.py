@@ -21,7 +21,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
 # Flask utils
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template,flash
 from werkzeug.utils import secure_filename
 #from gevent.pywsgi import WSGIServer
 
@@ -55,6 +55,21 @@ class Comments(db.Model):
     Description = db.Column(db.String(2000), nullable=False)
     Date_Created = db.Column(db.DateTime, default=datetime.utcnow)
 
+class Products(db.Model):
+    Id_Product = db.Column(db.Integer, primary_key= True)
+    Price = db.Column(db.Integer)
+    Product_Name = db.Column(db.String(2000))
+    Quantity = db.Column(db.Integer)
+    Date = db.Column(db.DateTime, default=datetime.utcnow)
+    Link_Image = db.Column(db.String(2000))
+
+class Cart(db.Model):
+    Id = db.Column(db.Integer, primary_key= True)
+    Id_Account = db.Column(db.Integer, db.ForeignKey('accounts.Id_Account'))
+    Product_Name = db.Column(db.String(2000), db.ForeignKey('products.Product_Name'))
+    Quantity = db.Column(db.Integer)
+    Link_Image = db.Column(db.String(2000))
+    Price = db.Column(db.Integer)
 
 # Model saved with Keras model.save()
 MODEL_PATH ='best.hdf5'
@@ -108,6 +123,10 @@ def model_predict(img_path, model):
     return str(result)
 
 
+@app.route('/single-product')
+def singleprod():
+    return render_template('single-product.html')
+
 @app.route('/detect', methods=['GET'])
 def predict():
     return render_template('index.html')
@@ -125,6 +144,10 @@ def homepage():
 @app.route('/dinhduong')
 def dinhduong():
     return render_template('dinhduong.html')
+
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
 
 @app.route('/Admin')
 def adminmanager():
@@ -168,7 +191,8 @@ def managetopic():
 
 @app.route('/product')
 def product():
-    return render_template('product.html')
+    products = Products.query.order_by(Products.Id_Product).all()
+    return render_template('product.html',products = products)
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
@@ -193,6 +217,8 @@ def login():
     error = None
     
     if request.method == 'POST':
+        if request.form['useraccount'] == "admin@gmail.com" and request.form['password'] == "admin":
+            return redirect("./Admin")
         useraccountcheck = Accounts.query.filter_by(User_Account = str(request.form['useraccount'])).first()
         if useraccountcheck is not None: 
             password =  useraccountcheck.Password
@@ -226,6 +252,33 @@ def register():
             error = "User account exist!"
     return render_template('signup.html',error = error)
 
+
+@app.route('/product/<int:Id_Product>',methods = ['POST', 'GET'])
+def singleproduct(Id_Product):
+    message = None   
+    if request.method == 'POST':
+        product = Products.query.filter_by(Id_Product = Id_Product).first()
+        link_image = product.Link_Image
+        product_name = product.Product_Name
+        quantity = request.form['quantity']
+        price = product.Price
+        prod_add_to_cart = Cart(Id_Account = 1,Product_Name = product_name,Quantity = quantity,Link_Image = link_image,Price = price)
+        db.session.add(prod_add_to_cart)
+        db.session.commit()
+        message = "Success!"
+        return render_template('single-product.html',product = product,message = message) 
+    else :
+        product = Products.query.filter_by(Id_Product = Id_Product).first()
+        return render_template('single-product.html',product = product) 
+
+
+@app.route('/cart')
+def cart():
+    sum = 0
+    items = Cart.query.filter_by(Id_Account = 1).all()
+    for item in items:
+        sum = sum+int(item.Price)*int(item.Quantity)
+    return render_template('cart.html',items = items,sum = sum)
 
 @app.route('/topic', methods = ['POST','GET'])
 def uptopic():

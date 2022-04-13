@@ -119,7 +119,21 @@ span{
     height: 1080px;
 }
 /* wrap-page */
-
+.alert {
+    padding: 12px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    border-width: 2px;
+    border-style: solid;
+  }
+  
+.alert-error {
+    border-color: darkred;
+    background-color: red;
+    color: white;
+}
+  
 
 /* .wrap-page {
     width: 100%;

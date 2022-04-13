@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrangTraiBacSiKhoa</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename = 'assets/images/favicon.ico')}}" />
+
+    <!-- CSS
+    ============================================ -->
+
+    <!-- Vendor CSS (Contain Bootstrap, Icon Fonts) -->
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/vendor/font-awesome.min.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/vendor/Pe-icon-7-stroke.css')}}" />
+
+    <!-- Plugin CSS (Global Plugins Files) -->
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/animate.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/nice-select.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/plugins/magnific-popup.min.css')}}" />
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename = 'assets/css/style.css')}}">
+</head>
+
+<body>
+    <section class="navigation">
+        <div class="navbar navbar-expand-md bg-light navbar-light">
+            <nav class="container" >
+              <a class="navbar-brand" href="#"><img src="{{url_for('static',filename = 'image/logo.png')}}" class="logo" alt=""></a>
+              <div class="navbar-brand">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="./homepage">Trang Chủ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./topic">Group</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./dinhduong">Dinh Dưỡng Khoa Học</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./detect">Phát Hiện Bệnh</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./login">Sign in</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="./signup">Sign up</a>
+                  </li> 
+                </ul>
+                  
+            </nav>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="cart-area section-space-y-axis-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <form action="javascript:void(0)">
+                            <div class="table-content table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="product_remove">Remove</th>
+                                            <th class="product-thumbnail">Images</th>
+                                            <th class="cart-product-name">Product Name</th>
+                                            <th class="product-price">Unit Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {%for item in items%}
+                                        <tr>
+                                            <td class="product_remove">
+                                                <a href="javascript:void(0)">
+                                                    <i class="pe-7s-close" title="Remove"></i>
+                                                </a>
+                                            </td>
+                                            <td class="product-thumbnail">
+                                                <a href="javascript:void(0)">
+                                                    <img src="{{item.Link_Image}}" alt="Cart Thumbnail">
+                                                </a>
+                                            </td>
+                                            <td class="product-name"><a href="javascript:void(0)">{{item.Product_Name}}</a></td>
+                                            <td class="product-price"><span class="amount">${{item.Price}}</span></td>
+                                            <td class="quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" value="{{item.Quantity}}" type="text">
+                                                </div>
+                                            </td>
+                                            <td class="product-subtotal"><span class="amount" id="price">${{item.Price*item.Quantity}}</span></td>
+                                        </tr>
+                                      {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="coupon-all">
+                                        <div class="coupon">
+                                            <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+                                            <input class="button mt-xxs-30" name="apply_coupon" value="Apply coupon" type="submit">
+                                        </div>
+                                        <div class="coupon2">
+                                            <input class="button" name="update_cart" value="Update cart" type="submit">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 ml-auto">
+                                    <div class="cart-page-total">
+                                        <h2>Cart totals</h2>
+                                        <ul>
+                                          {%if sum%}
+                                            <li>Subtotal <span>${{sum}}</span></li>
+                                            <li>Total <span>${{sum}}</span></li>
+                                          {%endif%}
+                                        </ul>
+                                        <a href="./checkout">Proceed to checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="location">
+        <div class="container">
+          
+              <div class="footer__contact">
+                <div class="body_footter">
+                <div class="left">
+                <p class="footer__contact-title">LIÊN HỆ VỚI CHÚNG TÔI</p>
+                <ul class="footer__contact-list">
+                  <li >
+                    <a class="footer__contact-address"> Tầng 6, toà nhà 254 Nguyễn Văn Linh, P.Thạch Gián, Q. Thanh
+                      Khê, Đà Nẵng</a>
+                  </li>
+                  <li >
+                      <a class="footer__contact-phone">(07) 6672 3591 </a>
+                    </li>
+                    <li >
+                      <a class="footer__contact-mail">
+                        lekhoa657@gmail.com
+                      </a>
+                    </li>
+                  </div>
+                
+                 <div class="right">
+                <p class="footer__contact-title">THÔNG TIN</p>
+                  <ul class="footer__shipping">
+                    <li>
+                      <a>Về chúng tôi</a>
+                    </li>
+                    <li>
+                      <a>Điều khoản &amp; Điều kiện</a>
+                    </li>
+                    <li>
+                      <a>Chính sách riêng tư</a>
+                    </li>
+                    
+                  </ul>
+                   </div>
+                   <div class="center">
+                    <p class="footer__contact-title">CHUYÊN MUC</p>
+                    <ul class="footer__center">
+                      <li>
+                        <a>Hỏi đáp</a>
+                      </li>
+                      <li>
+                        <a class="bth-social" href="https://www.facebook.com/">
+                          <i class="fab fa-facebook"></i>
+                        </a>
+                        <a class="bth-social" href="https://www.instagram.com/">
+                          <i class="fab fa-instagram"></i>
+                        </a>
+                      </li>
+                      
+                      
+                      
+                    </ul>
+                  
+                   </div>
+              </div>
+                  <div class="col-sm-12 col-md-8">
+                    <p class="footer__extend-text">
+                      Copyright © Your Website 2022
+                    </p>
+                  </div>
+                  <div className="col-sm-12 col-md-4">
+                    <div className="footer__extend-img d-flex justify-content-end">
+                      <img src={footer_extend} alt="" />
+                    </div>
+              </div>
+              
+                  
+                </div>
+              </div>  
+              
+             
+    </div> 
+
+
+</body>
+
+</html>
