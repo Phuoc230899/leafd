@@ -14,35 +14,40 @@
 </head>
 <body>
 
-    <div class="navigation">
-        <div class="navbar navbar-expand-md bg-light navbar-light">
-            <nav class="container" >
-              <a class="navbar-brand" href="#"><img src="{{url_for('static',filename = 'image/logo.png')}}" class="logo" alt=""></a>
-              <div class="navbar-brand">
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link" href="./homepage">Trang Chủ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./topic">Group</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./dinhduong">Dinh Dưỡng Khoa Học</a>
-                  </li> 
-                  <li class="nav-item">
-                    <a class="nav-link" href="./detect">Phát Hiện Bệnh</a>
-                  </li> 
-                  <li class="nav-item">
-                    <a class="nav-link" href="./login">Sign in</a>
-                  </li> 
-                  <li class="nav-item">
-                    <a class="nav-link" href="./signup">Sign up</a>
-                  </li> 
-                </ul>
-              </div>  
-            </nav>
-        </div>
-    </div>   
+  <section class="navigation">
+    <div class="navbar navbar-expand-md bg-light navbar-light">
+        <nav class="container" >
+          <a class="navbar-brand" href="#"><img src="{{url_for('static',filename = 'image/logo.png')}}" class="logo" alt=""></a>
+          <div class="navbar-brand">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="./homepage">Trang Chủ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./topic">Group</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./dinhduong">Dinh Dưỡng Khoa Học</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="./detect">Phát Hiện Bệnh</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="./login">Sign in</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="./signup">Sign up</a>
+              </li>
+              {%if username%}
+              <li class="nav-item">
+                <a class="nav-link" href="./signup">{{username}}</a>
+              </li>
+              {%endif%}
+            </ul>
+              
+        </nav>
+    </div>
+</section>
 
 <div class="content">
   <div class="container">

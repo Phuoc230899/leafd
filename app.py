@@ -5,7 +5,6 @@ import glob
 import re
 import numpy as np
 import tensorflow as tf
-import tensorflow as tf
 import cv2
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
@@ -19,17 +18,17 @@ from datetime import datetime
 from tensorflow.keras.applications.resnet50 import preprocess_input
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-
+from keras.preprocessing.image import img_to_array
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template,flash
 from werkzeug.utils import secure_filename
 #from gevent.pywsgi import WSGIServer
-
+import pickle
 # Define a flask app
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydb.db'
 db = SQLAlchemy(app)
-user_name = ""
+user_name = ['']
 
 class Accounts(db.Model):
     Id_Account = db.Column(db.Integer, primary_key= True)
@@ -79,6 +78,19 @@ classes = ['Pepper__bell___Bacterial_spot','Pepper__bell___healthy','Potato___Ea
         ,'Tomato_Late_blight','Tomato_Leaf_Mold','Tomato_Septoria_leaf_spot','Tomato_Spider_mites_Two_spotted_spider_mite' ]
 # Load your trained model
 model = load_model(MODEL_PATH)
+# model = pickle.load(open('./cnn_model.pkl', 'rb'))
+# default_image_size = tuple((256, 256))
+# def convert_image_to_array(image_dir):
+#     try:
+#         image = cv2.imread(image_dir)
+#         if image is not None :
+#             image = cv2.resize(image, default_image_size)   
+#             return img_to_array(image)
+#         else :
+#             return np.array([])
+#     except Exception as e:
+#         print(f"Error : {e}")
+#         return None
 
 def preprocess_image(img):
         if (img.shape[0] != 224 or img.shape[1] != 224):
@@ -116,38 +128,49 @@ def model_predict(img_path, model):
 #         preds="The leaf is fresh cotton leaf"
 #     else:
 #         preds="The leaf is fresh cotton plant"
+
     img = cv2.imread(img_path)
     pred = model.predict(preprocess_image(img))
     result = classes[np.argmax(pred)]        
-    
+
+    # im=convert_image_to_array(img_path)
+    # np_image_li = np.array(im, dtype=np.float16) / 225.0
+    # npp_image = np.expand_dims(np_image_li, axis=0)
+    # result=model.predict(npp_image)
     return str(result)
 
 
 @app.route('/single-product')
 def singleprod():
-    return render_template('single-product.html')
+    un = user_name[-1]
+    return render_template('single-product.html',username=un)
 
 @app.route('/detect', methods=['GET'])
 def predict():
-    return render_template('index.html')
+    un = user_name[-1]
+    return render_template('index.html',username = un)
 
 @app.route('/')
 def index():
     # Main page
-    return render_template('homepage.html')
+    un = user_name[-1]
+    return render_template('homepage.html',username=un)
 
 @app.route('/homepage')
 def homepage():
     # Main page
-    return render_template('homepage.html')
+    un = user_name[-1]
+    return render_template('homepage.html',username = un)
 
 @app.route('/dinhduong')
 def dinhduong():
-    return render_template('dinhduong.html')
+    un = user_name[-1]
+    return render_template('dinhduong.html',username=un)
 
 @app.route('/checkout')
 def checkout():
-    return render_template('checkout.html')
+    un = user_name[-1]
+    return render_template('checkout.html',username=un)
 
 @app.route('/Admin')
 def adminmanager():
@@ -192,7 +215,8 @@ def managetopic():
 @app.route('/product')
 def product():
     products = Products.query.order_by(Products.Id_Product).all()
-    return render_template('product.html',products = products)
+    un = user_name[-1]
+    return render_template('product.html',products = products,username = un)
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
@@ -225,6 +249,7 @@ def login():
             if str(request.form['password']) != str(password):
                 error = 'Sai tên đăng nhập hoặc mật khẩu !!!.'
             else:
+                user_name.append(str(useraccountcheck.User_Name))
                 return redirect("./homepage")
         else:
             error = 'Sai tên đăng nhập hoặc mật khẩu !!!.'
@@ -262,10 +287,17 @@ def singleproduct(Id_Product):
         product_name = product.Product_Name
         quantity = request.form['quantity']
         price = product.Price
-        prod_add_to_cart = Cart(Id_Account = 1,Product_Name = product_name,Quantity = quantity,Link_Image = link_image,Price = price)
-        db.session.add(prod_add_to_cart)
-        db.session.commit()
-        message = "Success!"
+        check = Cart.query.filter_by(Product_Name = product_name).first()
+        if quantity == '':
+            quantity = 1
+        if check == None:
+            prod_add_to_cart = Cart(Id_Account = 1,Product_Name = product_name,Quantity = quantity,Link_Image = link_image,Price = price)
+            db.session.add(prod_add_to_cart)
+            db.session.commit()
+            message = "Success!"
+        else:
+            check.Quantity = check.Quantity + int(quantity)
+            db.session.commit()
         return render_template('single-product.html',product = product,message = message) 
     else :
         product = Products.query.filter_by(Id_Product = Id_Product).first()
@@ -274,16 +306,18 @@ def singleproduct(Id_Product):
 
 @app.route('/cart')
 def cart():
+    un = user_name[-1]
     sum = 0
     items = Cart.query.filter_by(Id_Account = 1).all()
     for item in items:
         sum = sum+int(item.Price)*int(item.Quantity)
-    return render_template('cart.html',items = items,sum = sum)
+    return render_template('cart.html',items = items,sum = sum,username = un)
 
 @app.route('/topic', methods = ['POST','GET'])
 def uptopic():
     error = None
     now = datetime.now()
+    un = user_name[-1]
     if request.method == 'POST':
         title = request.form['title']
         decription = request.form['description']
@@ -293,10 +327,10 @@ def uptopic():
         return redirect('/topic')
     else:
         topics = Topic.query.order_by(Topic.Date_Created).all()
-        return render_template('post.html', topics=topics)
+        return render_template('post.html', topics=topics,username=un)
         #error = "Lỗi ko thêm topic được!!!"
 
-    return render_template('post.html')
+    return render_template('post.html',username=un)
 
 
 @app.route('/topic/<int:Id_Topic>', methods = ['POST','GET'])
