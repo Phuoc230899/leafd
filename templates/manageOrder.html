@@ -339,24 +339,24 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>ID Account</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Customer ID</th>
+                                            <th>Product List</th>
+                                            <th>Total</th>
                                             <th>Date Created</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for topic in topics %}
+                                        {% for order in orders %}
                                             <tr>
-                                                <td>{{topic.Id_Topic}}</td>
-                                                <td>{{topic.Id_Account}}</td>
-                                                <td>{{topic.Title}}</td>
-                                                <td><textarea class="form-control" name = "description" id="exampleFormControlTextarea1" rows="5">{{topic.Description}}</textarea></td>
-                                                <td>{{topic.Date_Created.date()}}</td>
+                                                <td>{{order.Id_Order}}</td>
+                                                <td>{{order.Id_Account}}</td>
+                                                <td><textarea class="form-control" name = "description" id="exampleFormControlTextarea1" rows="5">{{order.Product_Name}}</textarea></td>
+                                                <td>${{order.Total}}.0</td>
+                                                <td>{{order.Date_Created.date()}}</td>
                                                 <td>
                                                     <a class="btn btn-warning m-r-5" >Update</a> |
-                                                    <a class="btn btn-info m-r-5" href = "./deleteTopic/{{topic.Id_Topic}}">Delete </a>
+                                                    <a class="btn btn-info m-r-5" href = "">Delete </a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
